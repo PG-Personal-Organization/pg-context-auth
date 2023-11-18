@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.pg</groupId>
+        <artifactId>pg-parent</artifactId>
+        <version>1.1.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>pg.context-auth</groupId>
+    <artifactId>context-auth</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <modules>
+        <module>pg.context-auth.domain</module>
+        <module>pg.context-auth.application</module>
+        <module>pg.context-auth.infrastructure</module>
+        <module>pg.context-auth.infrastructure-spring</module>
+        <module>pg.context-auth.standalone</module>
+        <module>pg.context-auth.integration-tests</module>
+    </modules>
+
+    <name>pg.context-auth</name>
+    <description>Backend app for Search Store app</description>
+
+    <properties>
+        <pg.context-auth.version>${version}</pg.context-auth.version>
+
+        <pg-lib-cqrs-version>1.1.0</pg-lib-cqrs-version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Inner modules -->
+            <dependency>
+                <groupId>pg.context-auth</groupId>
+                <artifactId>pg.context-auth.infrastructure-spring</artifactId>
+                <version>${pg.context-auth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pg.context-auth</groupId>
+                <artifactId>pg.context-auth.infrastructure</artifactId>
+                <version>${pg.context-auth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pg.context-auth</groupId>
+                <artifactId>pg.context-auth.application</artifactId>
+                <version>${pg.context-auth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pg.context-auth</groupId>
+                <artifactId>pg.context-auth.domain</artifactId>
+                <version>${pg.context-auth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pg.context-auth</groupId>
+                <artifactId>pg.context-auth.standalone</artifactId>
+                <version>${pg.context-auth.version}</version>
+            </dependency>
+
+            <!-- Libraries -->
+            <dependency>
+                <groupId>org.pg</groupId>
+                <artifactId>pg.lib.cqrs</artifactId>
+                <version>${pg-lib-cqrs-version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <inherited>true</inherited>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/PG-Personal-Organization</url>
+        </repository>
+    </repositories>
+
+</project>
