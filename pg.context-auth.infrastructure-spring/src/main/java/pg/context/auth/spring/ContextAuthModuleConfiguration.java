@@ -5,8 +5,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.scheduling.annotation.EnableAsync;
-import pg.context.auth.spring.configuration.app.SecurityConfig;
 import pg.lib.cqrs.config.CommandQueryAutoConfiguration;
 
 /**
@@ -18,10 +16,6 @@ import pg.lib.cqrs.config.CommandQueryAutoConfiguration;
 @ComponentScan("pg.context.auth")
 @Import({
         CommandQueryAutoConfiguration.class,
-        SecurityConfig.class,
-//        ContextAuthInfrastructureConfiguration.class,
-//        ContextAuthApplicationConfiguration.class
 })
-@EnableAsync
 public class ContextAuthModuleConfiguration {
 }

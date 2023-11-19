@@ -8,13 +8,15 @@ import lombok.ToString;
 import pg.context.auth.domain.context.UserContext;
 import pg.lib.cqrs.query.Query;
 
+import java.io.Serializable;
+
 /**
  * The type User context query.
  */
+@Getter
 @ToString
 @AllArgsConstructor(staticName = "of")
-@Getter
-public class UserContextQuery implements Query<UserContext> {
+public class UserContextQuery implements Query<UserContext>, Serializable {
     @NonNull
     @NotEmpty
     private final String contextToken;

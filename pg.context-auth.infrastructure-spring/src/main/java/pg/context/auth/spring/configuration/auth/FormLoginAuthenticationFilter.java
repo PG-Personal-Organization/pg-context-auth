@@ -6,7 +6,6 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NonNull;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -26,7 +25,6 @@ import static pg.context.auth.spring.configuration.auth.JwtExpire.REFRESH_TOKEN;
  * The type Form login authentication filter.
  */
 @AllArgsConstructor
-@Getter
 public class FormLoginAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private static final boolean POST_ONLY = true;
     private final AuthenticationManager authenticationManager;

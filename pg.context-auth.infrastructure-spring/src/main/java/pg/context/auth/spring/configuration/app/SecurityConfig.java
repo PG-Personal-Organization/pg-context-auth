@@ -51,7 +51,7 @@ public class SecurityConfig {
     }
 
     /**
-     * Role hierarchy role hierarchy.
+     * Role hierarchy.
      *
      * @return the role hierarchy
      */

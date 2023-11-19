@@ -20,7 +20,7 @@ public class AsyncConfig {
     private final ContextService contextService;
 
     /**
-     * Clear cache.
+     * Clear context database.
      */
     @Scheduled(timeUnit = TimeUnit.HOURS, fixedRate = 1)
     public void clearContextDatabase() {

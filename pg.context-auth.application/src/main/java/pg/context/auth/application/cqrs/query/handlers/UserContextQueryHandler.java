@@ -24,8 +24,8 @@ public class UserContextQueryHandler implements QueryHandler<UserContextQuery, U
     /**
      * Instantiates a new User context query handler.
      *
-     * @param contextService   the context dao
-     * @param contextCache the context cache
+     * @param contextService the context service
+     * @param contextCache   the context cache
      */
     public UserContextQueryHandler(final ContextService contextService,
                                    final @Qualifier(CacheNames.CONTEXT_CACHE) Cache contextCache) {

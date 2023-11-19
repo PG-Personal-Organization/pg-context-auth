@@ -1,4 +1,4 @@
-package pg.context.auth.spring.delivery.http;
+package pg.context.auth.spring.delivery.http.frontend;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
