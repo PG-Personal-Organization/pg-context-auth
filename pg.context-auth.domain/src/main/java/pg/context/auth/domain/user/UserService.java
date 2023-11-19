@@ -3,9 +3,9 @@ package pg.context.auth.domain.user;
 import java.util.List;
 
 /**
- * The interface User repository.
+ * The interface User service.
  */
-public interface UserDao {
+public interface UserService {
     /**
      * Find by username user.
      *
@@ -23,15 +23,15 @@ public interface UserDao {
     User findById(String id);
 
     /**
-     * Add user.
+     * Add user string.
      *
      * @param user the user
-     * @return the id
+     * @return the string
      */
     String addUser(User user);
 
     /**
-     * Find all list.
+     * Find all users list.
      *
      * @return the list
      */

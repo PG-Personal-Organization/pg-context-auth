@@ -10,7 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pg.context.auth.domain.user.User;
-import pg.context.auth.domain.user.UserDao;
+import pg.context.auth.domain.user.UserService;
 
 import java.util.List;
 
@@ -20,14 +20,14 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserDaoAuthenticationProvider implements AuthenticationProvider {
-    private final UserDao userDao;
+    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public Authentication authenticate(final Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-        User user = userDao.findByUsername(username);
+        User user = userService.findByUsername(username);
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
             List<SimpleGrantedAuthority> authorities = user.getRoles().stream()
                     .map(role -> new SimpleGrantedAuthority("ROLE_" + role))

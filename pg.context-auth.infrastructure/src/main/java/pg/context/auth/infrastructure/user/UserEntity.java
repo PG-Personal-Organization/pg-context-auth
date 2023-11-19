@@ -29,7 +29,7 @@ public class UserEntity {
     private Set<String> roles;
 
     /**
-     * Instantiates a new User.
+     * Instantiates a new User entity.
      *
      * @param username the username
      * @param password the password

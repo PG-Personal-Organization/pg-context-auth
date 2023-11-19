@@ -4,16 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pg.context.auth.domain.user.User;
-import pg.context.auth.domain.user.UserDao;
+import pg.context.auth.domain.user.UserService;
 
 import java.util.List;
 
 /**
- * The type User service.
+ * The type User repository service.
  */
 @Service
 @RequiredArgsConstructor
-public class UserService implements UserDao {
+public class UserRepositoryService implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 

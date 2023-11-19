@@ -16,12 +16,13 @@
     <version>1.0.0</version>
 
     <modules>
-        <module>pg.context-auth.domain</module>
+        <module>pg.context-auth.api</module>
         <module>pg.context-auth.application</module>
+        <module>pg.context-auth.domain</module>
         <module>pg.context-auth.infrastructure</module>
         <module>pg.context-auth.infrastructure-spring</module>
-        <module>pg.context-auth.standalone</module>
         <module>pg.context-auth.integration-tests</module>
+        <module>pg.context-auth.standalone</module>
     </modules>
 
     <name>pg.context-auth</name>
@@ -30,6 +31,7 @@
     <properties>
         <pg.context-auth.version>${version}</pg.context-auth.version>
 
+        <!-- Libraries -->
         <pg-lib-cqrs-version>1.1.0</pg-lib-cqrs-version>
     </properties>
 
@@ -49,6 +51,11 @@
             <dependency>
                 <groupId>pg.context-auth</groupId>
                 <artifactId>pg.context-auth.application</artifactId>
+                <version>${pg.context-auth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pg.context-auth</groupId>
+                <artifactId>pg.context-auth.api</artifactId>
                 <version>${pg.context-auth.version}</version>
             </dependency>
             <dependency>

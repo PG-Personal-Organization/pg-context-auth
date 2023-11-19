@@ -15,7 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import pg.context.auth.domain.user.User;
-import pg.context.auth.domain.user.UserDao;
+import pg.context.auth.domain.user.UserService;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -28,18 +28,18 @@ import static pg.context.auth.spring.configuration.auth.JwtExpire.ACCESS_TOKEN;
 @Service
 public class JwtTokenRefresher {
     private static final String AUTH_BEARER = "Bearer";
-    private final UserDao userDao;
+    private final UserService userService;
     private final String secretKey;
 
     /**
      * Instantiates a new Jwt token refresher.
      *
-     * @param userDao   the user dao
-     * @param secretKey the secret key
+     * @param userService the user service
+     * @param secretKey   the secret key
      */
     @Autowired
-    public JwtTokenRefresher(final UserDao userDao, final @Value("${jwt.secret}") String secretKey) {
-        this.userDao = userDao;
+    public JwtTokenRefresher(final UserService userService, final @Value("${jwt.secret}") String secretKey) {
+        this.userService = userService;
         this.secretKey = secretKey;
     }
 
@@ -65,7 +65,7 @@ public class JwtTokenRefresher {
 
                 String userId = body.get("userId", String.class);
 
-                User user = userDao.findById(userId);
+                User user = userService.findById(userId);
 
                 String accessToken = Jwts.builder()
                         .setSubject(user.getUsername())

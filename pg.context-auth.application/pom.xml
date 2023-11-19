@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>pg.context-auth</groupId>
-            <artifactId>pg.context-auth.domain</artifactId>
+            <artifactId>pg.context-auth.api</artifactId>
         </dependency>
 
         <dependency>

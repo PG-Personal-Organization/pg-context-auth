@@ -14,7 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import pg.context.auth.domain.user.UserDao;
+import pg.context.auth.domain.user.UserService;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -30,7 +30,7 @@ import static pg.context.auth.spring.configuration.auth.JwtExpire.REFRESH_TOKEN;
 public class FormLoginAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private static final boolean POST_ONLY = true;
     private final AuthenticationManager authenticationManager;
-    private final UserDao userDao;
+    private final UserService userService;
     private final String secretKey;
 
     @Override
@@ -60,7 +60,7 @@ public class FormLoginAuthenticationFilter extends UsernamePasswordAuthenticatio
 
         String username = this.obtainUsername(request);
 
-        String userId = userDao.findByUsername(username).getId();
+        String userId = userService.findByUsername(username).getId();
 
         String accessToken = Jwts.builder()
                 .setSubject(authResult.getName())
