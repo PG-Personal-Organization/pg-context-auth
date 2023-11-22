@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import pg.lib.common.spring.config.CommonModuleConfiguration;
 import pg.lib.cqrs.config.CommandQueryAutoConfiguration;
+import pg.lib.remote.cqrs.config.RemoteModulesCqrsConfiguration;
 
 /**
  * The type Context auth module configuration.
@@ -18,6 +19,7 @@ import pg.lib.cqrs.config.CommandQueryAutoConfiguration;
 @Import({
         CommonModuleConfiguration.class,
         CommandQueryAutoConfiguration.class,
+        RemoteModulesCqrsConfiguration.class
 })
 public class ContextAuthModuleConfiguration {
 }

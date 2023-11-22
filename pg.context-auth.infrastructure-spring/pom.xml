@@ -73,6 +73,10 @@
             <groupId>org.pg</groupId>
             <artifactId>pg.lib.cqrs</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.pg</groupId>
+            <artifactId>pg.lib.remote-cqrs</artifactId>
+        </dependency>
 
         <!-- Inner modules-->
         <dependency>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import pg.context.auth.application.cqrs.query.handlers.UserContextQuery;
 import pg.context.auth.domain.context.UserContext;
 import pg.lib.cqrs.service.ServiceExecutor;
+import pg.lib.remote.cqrs.executors.RemoteCqrsModuleServiceExecutor;
 
 import static pg.context.auth.spring.delivery.http.common.HttpCommonHelper.CQRS_PATH;
 
@@ -22,6 +23,7 @@ import static pg.context.auth.spring.delivery.http.common.HttpCommonHelper.CQRS_
 @Tag(name = "CQRS")
 public class CqrsDomainHttpEndpoint {
     private final ServiceExecutor serviceExecutor;
+    private final RemoteCqrsModuleServiceExecutor remoteExecutor;
 
     /**
      * Execute user context.
@@ -33,5 +35,10 @@ public class CqrsDomainHttpEndpoint {
     public UserContext execute(final @Valid @NonNull @RequestBody UserContextQuery query) {
         log.debug("Started execution of UserContextQuery: {}", query);
         return serviceExecutor.executeQuery(query);
+    }
+
+    @PostMapping("/test/cqrs")
+    public UserContext test(@RequestParam String token) {
+        return this.remoteExecutor.execute(UserContextQuery.of(token), "users");
     }
 }
