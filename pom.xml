@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>pg.context-auth</groupId>
-    <artifactId>context-auth</artifactId>
+    <artifactId>pg.context-auth</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
 
