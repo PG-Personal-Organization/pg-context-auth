@@ -14,7 +14,7 @@ import java.util.UUID;
 public class ContextSecurityService {
     private final String serialId = UUID.randomUUID().toString();
 
-    @Value("context-auth.token.prefix:CTX_1_")
+    @Value("${context-auth.token.prefix:CTX_1_}")
     private String tokenPrefix;
 
     /**

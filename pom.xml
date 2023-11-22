@@ -32,7 +32,7 @@
         <pg.context-auth.version>${version}</pg.context-auth.version>
 
         <!-- Libraries -->
-        <pg-lib-cqrs-version>1.1.0</pg-lib-cqrs-version>
+        <pg-lib-version>1.2.0</pg-lib-version>
     </properties>
 
     <dependencyManagement>
@@ -72,27 +72,17 @@
             <!-- Libraries -->
             <dependency>
                 <groupId>org.pg</groupId>
+                <artifactId>pg.lib.common</artifactId>
+                <version>${pg-lib-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.pg</groupId>
                 <artifactId>pg.lib.cqrs</artifactId>
-                <version>${pg-lib-cqrs-version}</version>
+                <version>${pg-lib-version}</version>
             </dependency>
 
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <inherited>true</inherited>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
     <repositories>
         <repository>

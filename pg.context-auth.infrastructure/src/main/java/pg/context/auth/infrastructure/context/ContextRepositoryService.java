@@ -55,8 +55,8 @@ public class ContextRepositoryService implements ContextService {
         contextRepository.save(context);
 
         val token = context.getContextToken();
-        contextCache.put(token, context);
-        log.debug("Created context for user: {} with token:{}", user, token);
+        contextCache.put(token, ContextMapper.fromEntity(context));
+        log.info("Created context for user: {} with token: {}", user, token);
         return token;
     }
 
@@ -65,7 +65,7 @@ public class ContextRepositoryService implements ContextService {
     public void removeContext(final @NonNull String contextToken) {
         val contextBox = contextRepository.findFirstByContextToken(contextToken);
         if (contextBox.isPresent()) {
-            log.debug("Removing context with token: {}", contextToken);
+            log.info("Removing context with token: {}", contextToken);
             contextRepository.delete(contextBox.get());
             contextCache.evict(contextToken);
         }
@@ -77,7 +77,7 @@ public class ContextRepositoryService implements ContextService {
         val contexts = contextRepository.findAllByUserId(user.getId());
 
         if (!contexts.isEmpty()) {
-            log.debug("Found:{} context for user: {}", contexts.size(), user);
+            log.info("Found:{} context for user: {}", contexts.size(), user);
             contextRepository.deleteAllInBatch(contexts);
             contexts.forEach(context -> contextCache.evict(context.getContextToken()));
         } else {
@@ -90,7 +90,7 @@ public class ContextRepositoryService implements ContextService {
     public void clearOldContexts() {
         val deprecatedContexts = contextRepository.findAllBySerialIdIsNot(contextSecurityService.getSerialId());
 
-        log.debug("Cleaning deprecatedContexts: {}", deprecatedContexts);
+        log.info("Cleaning deprecatedContexts: {}", deprecatedContexts);
         contextRepository.deleteAllInBatch(deprecatedContexts);
         deprecatedContexts.forEach(context -> contextCache.evict(context.getContextToken()));
     }

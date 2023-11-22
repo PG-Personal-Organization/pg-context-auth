@@ -1,6 +1,10 @@
 server:
   error:
     include-message: always
+  port: 8081
+management:
+  server:
+    port: 9081
 
 spring:
   config:

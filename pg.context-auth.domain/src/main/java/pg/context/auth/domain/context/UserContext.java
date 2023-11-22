@@ -1,9 +1,6 @@
 package pg.context.auth.domain.context;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -11,10 +8,12 @@ import java.util.Set;
 /**
  * The type User context.
  */
-@Getter
+@Data
 @Builder
-@AllArgsConstructor
+@ToString
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserContext implements Serializable {
     private String userId;
     private String username;

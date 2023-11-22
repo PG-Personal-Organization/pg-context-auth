@@ -5,6 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import pg.lib.common.spring.config.CommonModuleConfiguration;
 import pg.lib.cqrs.config.CommandQueryAutoConfiguration;
 
 /**
@@ -15,6 +16,7 @@ import pg.lib.cqrs.config.CommandQueryAutoConfiguration;
 @EnableJpaRepositories("pg.context.auth")
 @ComponentScan("pg.context.auth")
 @Import({
+        CommonModuleConfiguration.class,
         CommandQueryAutoConfiguration.class,
 })
 public class ContextAuthModuleConfiguration {
