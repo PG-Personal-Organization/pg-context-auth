@@ -6,7 +6,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
-import pg.context.auth.application.cqrs.query.handlers.UserContextQuery;
+import pg.context.auth.api.cqrs.query.UserContextQuery;
 import pg.context.auth.domain.context.UserContext;
 import pg.lib.cqrs.service.ServiceExecutor;
 

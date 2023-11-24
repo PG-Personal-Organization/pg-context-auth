@@ -1,4 +1,4 @@
-package pg.context.auth.application.cqrs.query.handlers;
+package pg.context.auth.api.cqrs.query;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;

@@ -48,8 +48,9 @@ public class SecurityConfig {
     /**
      * Security filter chain security filter chain.
      *
-     * @param http                   the http
-     * @param authenticationProvider the authentication provider
+     * @param http                    the http
+     * @param authenticationProvider  the authentication provider
+     * @param corsConfigurationSource the cors configuration source
      * @return the security filter chain
      * @throws Exception the exception
      */

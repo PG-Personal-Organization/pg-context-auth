@@ -17,9 +17,14 @@
             <groupId>pg.context-auth</groupId>
             <artifactId>pg.context-auth.domain</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.pg</groupId>
             <artifactId>pg.lib.cqrs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.pg</groupId>
+            <artifactId>pg.lib.remote-cqrs</artifactId>
         </dependency>
         <dependency>
             <groupId>jakarta.validation</groupId>

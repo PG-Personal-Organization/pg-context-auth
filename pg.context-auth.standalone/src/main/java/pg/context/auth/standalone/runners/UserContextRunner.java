@@ -9,6 +9,9 @@ import pg.context.auth.infrastructure.context.ContextRepositoryService;
 
 import java.util.Set;
 
+/**
+ * The type User context runner.
+ */
 @Service
 @RequiredArgsConstructor
 public class UserContextRunner implements ApplicationRunner {

@@ -5,6 +5,7 @@ import lombok.val;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.Cache;
 import org.springframework.stereotype.Service;
+import pg.context.auth.api.cqrs.query.UserContextQuery;
 import pg.context.auth.domain.context.UserContext;
 import pg.context.auth.domain.context.ContextService;
 import pg.context.auth.domain.context.UserContextNotFoundException;
@@ -55,6 +56,6 @@ public class UserContextQueryHandler implements QueryHandler<UserContextQuery, U
 
     private UserContext getContext(final String contextToken) {
         return contextService.findByToken(contextToken)
-                .orElseThrow(UserContextNotFoundException::new);
+                .orElseThrow(() -> new UserContextNotFoundException(contextToken));
     }
 }
