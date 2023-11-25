@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * The type Context entity.
@@ -18,9 +19,10 @@ import java.util.Set;
 public class ContextEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
     private String userId;
     private String username;
+
     @ElementCollection(targetClass = String.class)
     private Set<String> roles;
 

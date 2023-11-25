@@ -19,7 +19,7 @@ import java.util.Optional;
  */
 @Log4j2
 @Service
-public class ContextRepositoryService implements ContextService {
+public class DatabaseContextService implements ContextService {
     private final ContextRepository contextRepository;
     private final ContextSecurityService contextSecurityService;
     private final Cache contextCache;
@@ -31,9 +31,9 @@ public class ContextRepositoryService implements ContextService {
      * @param contextSecurityService the context security service
      * @param contextCache           the context cache
      */
-    public ContextRepositoryService(final ContextRepository contextRepository,
-                                    final ContextSecurityService contextSecurityService,
-                                    final @Qualifier(CacheNames.CONTEXT_CACHE) Cache contextCache) {
+    public DatabaseContextService(final ContextRepository contextRepository,
+                                  final ContextSecurityService contextSecurityService,
+                                  final @Qualifier(CacheNames.CONTEXT_CACHE) Cache contextCache) {
         this.contextRepository = contextRepository;
         this.contextSecurityService = contextSecurityService;
         this.contextCache = contextCache;
@@ -41,6 +41,13 @@ public class ContextRepositoryService implements ContextService {
 
     @Override
     public Optional<UserContext> findByToken(final @NonNull String contextToken) {
+        if (contextCache != null) {
+            var userContext = contextCache.get(contextToken, UserContext.class);
+            if (userContext != null) {
+                return Optional.of(userContext);
+            }
+        }
+
         return contextRepository.findFirstByContextToken(contextToken)
                 .filter(contextSecurityService::checkSerialId)
                 .map(ContextMapper::fromEntity)

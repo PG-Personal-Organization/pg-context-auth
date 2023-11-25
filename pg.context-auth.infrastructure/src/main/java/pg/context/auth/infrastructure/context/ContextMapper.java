@@ -4,6 +4,8 @@ import lombok.experimental.UtilityClass;
 import pg.context.auth.domain.context.UserContext;
 import pg.context.auth.domain.user.User;
 
+import java.util.HashSet;
+
 /**
  * The type Context mapper.
  */
@@ -19,7 +21,7 @@ public class ContextMapper {
         return ContextEntity.builder()
                 .userId(user.getId())
                 .username(user.getUsername())
-                .roles(user.getRoles())
+                .roles(new HashSet<>(user.getRoles()))
                 .build();
     }
 
@@ -33,7 +35,8 @@ public class ContextMapper {
         return UserContext.builder()
                 .userId(entity.getUserId())
                 .username(entity.getUsername())
-                .roles(entity.getRoles())
+                .roles(new HashSet<>(entity.getRoles()))
+                .contextToken(entity.getContextToken())
                 .build();
     }
 }

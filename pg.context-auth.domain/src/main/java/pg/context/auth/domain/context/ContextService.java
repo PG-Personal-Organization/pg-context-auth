@@ -20,7 +20,7 @@ public interface ContextService {
      * Create context for user string.
      *
      * @param user the user
-     * @return the string
+     * @return the token
      */
     String createContextForUser(User user);
 

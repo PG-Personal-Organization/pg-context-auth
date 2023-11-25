@@ -16,7 +16,7 @@ public class UserMapper {
      */
     User fromEntity(final UserEntity entity) {
         return User.builder()
-                .id(entity.getId())
+                .id(String.valueOf(entity.getId()))
                 .username(entity.getUsername())
                 .password(entity.getPassword())
                 .enabled(entity.isEnabled())

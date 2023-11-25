@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-public class UserRepositoryService implements UserService {
+public class DatabaseUserService implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -35,8 +35,7 @@ public class UserRepositoryService implements UserService {
     public String addUser(final User user) {
         UserEntity entity = UserMapper.fromDto(user);
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
-        return userRepository.save(entity)
-                .getId();
+        return userRepository.save(entity).getId().toString();
     }
 
     @Override

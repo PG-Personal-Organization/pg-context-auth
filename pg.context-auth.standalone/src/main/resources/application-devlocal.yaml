@@ -7,6 +7,9 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password: password
+  sql:
+    init:
+      mode: embedded
   jpa:
     hibernate:
       ddl-auto: create
