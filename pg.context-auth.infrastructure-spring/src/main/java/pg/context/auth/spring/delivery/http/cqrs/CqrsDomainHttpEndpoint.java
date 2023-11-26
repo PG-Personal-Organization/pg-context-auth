@@ -10,7 +10,8 @@ import pg.context.auth.api.cqrs.query.UserContextQuery;
 import pg.context.auth.domain.context.UserContext;
 import pg.lib.cqrs.service.ServiceExecutor;
 
-import static pg.context.auth.spring.delivery.http.common.HttpCommonHelper.CQRS_PATH;
+import static pg.context.auth.api.frontend.HttpEndpointPaths.USER_CONTEXT_QUERY_BASE;
+import static pg.context.auth.api.frontend.HttpServicesPaths.CQRS_PATH;
 
 /**
  * The type Cqrs domain http endpoint.
@@ -29,7 +30,7 @@ public class CqrsDomainHttpEndpoint {
      * @param query the query
      * @return the user context
      */
-    @PostMapping("/UserContextQuery")
+    @PostMapping(USER_CONTEXT_QUERY_BASE)
     public UserContext execute(final @Valid @NonNull @RequestBody UserContextQuery query) {
         log.debug("Started execution of UserContextQuery: {}", query);
         return serviceExecutor.executeQuery(query);

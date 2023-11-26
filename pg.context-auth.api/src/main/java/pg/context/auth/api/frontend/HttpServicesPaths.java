@@ -1,4 +1,4 @@
-package pg.context.auth.spring.delivery.http.common;
+package pg.context.auth.api.frontend;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
  * The type Http common helper.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class HttpCommonHelper {
+public class HttpServicesPaths {
     /**
      * The constant BASE_PATH.
      */
-    public static final String BASE_PATH = "api";
+    public static final String BASE_PATH = "/api";
 
     /**
      * The constant AUTH_PATH.

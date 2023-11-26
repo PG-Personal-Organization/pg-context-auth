@@ -1,17 +1,16 @@
 package pg.context.auth.spring.configuration.app;
 
-import lombok.NonNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
-import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
-import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
-import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
-import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
+import pg.context.auth.api.context.provider.ContextProvider;
+import pg.context.auth.api.context.provider.local.LocalUserContextProvider;
+import pg.context.auth.api.frontend.HttpEndpointPaths;
+import pg.context.auth.domain.context.UserContext;
+import pg.lib.cqrs.service.ServiceExecutor;
 
 /**
  * The type Security config.
@@ -19,54 +18,15 @@ import org.springframework.web.cors.CorsConfigurationSource;
 @Configuration
 public class SecurityConfig {
 
-    /**
-     * Role hierarchy.
-     *
-     * @return the role hierarchy
-     */
     @Bean
-    public RoleHierarchy roleHierarchy() {
-        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-        String hierarchy = "ROLE_ADMIN > ROLE_USER";
-        roleHierarchy.setHierarchy(hierarchy);
-        return roleHierarchy;
+    public Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> loginRequestCustomizer() {
+        return requests -> requests.requestMatchers(HttpMethod.POST, HttpEndpointPaths.LOGIN)
+                .anonymous()
+                ;
     }
 
-    /**
-     * Method security expression handler method security expression handler.
-     *
-     * @param roleHierarchy the role hierarchy
-     * @return the method security expression handler
-     */
     @Bean
-    static @NonNull MethodSecurityExpressionHandler methodSecurityExpressionHandler(final @NonNull RoleHierarchy roleHierarchy) {
-        DefaultMethodSecurityExpressionHandler expressionHandler = new DefaultMethodSecurityExpressionHandler();
-        expressionHandler.setRoleHierarchy(roleHierarchy);
-        return expressionHandler;
-    }
-
-    /**
-     * Security filter chain security filter chain.
-     *
-     * @param http                    the http
-     * @param authenticationProvider  the authentication provider
-     * @param corsConfigurationSource the cors configuration source
-     * @return the security filter chain
-     * @throws Exception the exception
-     */
-    @Bean
-    public SecurityFilterChain securityFilterChain(final @NonNull HttpSecurity http,
-                                                   final @NonNull AuthenticationProvider authenticationProvider,
-                                                   final @NonNull CorsConfigurationSource corsConfigurationSource) throws Exception {
-        http
-                .authenticationProvider(authenticationProvider)
-                .cors(cors -> cors.configurationSource(corsConfigurationSource))
-                .csrf(AbstractHttpConfigurer::disable)
-
-                .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/", "/actuator/**", "/swagger-ui/**", "/swagger-ui.html**", "/v3/api-docs/**", "/**").permitAll())
-        ;
-
-        return http.build();
+    public ContextProvider<UserContext> contextProvider(final ServiceExecutor serviceExecutor) {
+        return new LocalUserContextProvider(serviceExecutor);
     }
 }

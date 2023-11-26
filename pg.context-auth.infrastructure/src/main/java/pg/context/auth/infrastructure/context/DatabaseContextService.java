@@ -59,6 +59,8 @@ public class DatabaseContextService implements ContextService {
     public String createContextForUser(final @NonNull User user) {
         final ContextEntity context = ContextMapper.fromUser(user);
         signContext(context);
+        clearContextsOfUser(user);
+
         contextRepository.save(context);
 
         val token = context.getContextToken();
@@ -84,11 +86,11 @@ public class DatabaseContextService implements ContextService {
         val contexts = contextRepository.findAllByUserId(user.getId());
 
         if (!contexts.isEmpty()) {
-            log.info("Found:{} context for user: {}", contexts.size(), user);
+            log.info("Deleting old contexts in number:{} for user: {}", contexts.size(), user);
             contextRepository.deleteAllInBatch(contexts);
             contexts.forEach(context -> contextCache.evict(context.getContextToken()));
         } else {
-            log.info("No user contexts found");
+            log.info("No previous user contexts found");
         }
     }
 

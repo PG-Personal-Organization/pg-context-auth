@@ -1,28 +1,24 @@
 package pg.context.auth.spring.delivery.http.frontend;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import pg.context.auth.api.frontend.login.LoginRequest;
-import pg.context.auth.domain.context.HeaderNames;
 import pg.context.auth.domain.context.UserContext;
 import pg.context.auth.domain.user.UserAuthenticationService;
 import pg.context.auth.domain.user.UserLoginRequest;
-import pg.context.auth.spring.configuration.auth.JwtTokenRefresher;
+import pg.lib.common.spring.auth.HeaderNames;
 
 import java.util.Optional;
 
-import static pg.context.auth.spring.delivery.http.common.HttpCommonHelper.AUTH_PATH;
+import static pg.context.auth.api.frontend.HttpEndpointPaths.LOGIN_BASE;
+import static pg.context.auth.api.frontend.HttpServicesPaths.AUTH_PATH;
 
 /**
  * The type Authorization http endpoint.
@@ -34,9 +30,8 @@ import static pg.context.auth.spring.delivery.http.common.HttpCommonHelper.AUTH_
 @Tag(name = "Authorization")
 public class AuthorizationHttpEndpoint {
     private final UserAuthenticationService authenticationService;
-    private final JwtTokenRefresher tokenRefresher;
 
-    @PostMapping("/login")
+    @PostMapping(LOGIN_BASE)
     public ResponseEntity<Void> attemptAuthentication(final @Valid @RequestBody LoginRequest loginRequest) {
         log.info("Processing login request for user: {}", loginRequest.getUsername());
         Optional<UserContext> result;
@@ -57,14 +52,4 @@ public class AuthorizationHttpEndpoint {
                 .orElseGet(() -> ResponseEntity.status(401).build());
     }
 
-    /**
-     * Refresh access token.
-     *
-     * @param request  the request
-     * @param response the response
-     */
-    @PostMapping("refresh-access")
-    public void refreshAccessToken(final HttpServletRequest request, final HttpServletResponse response) {
-        tokenRefresher.attemptRefreshToken(request, response);
-    }
 }
