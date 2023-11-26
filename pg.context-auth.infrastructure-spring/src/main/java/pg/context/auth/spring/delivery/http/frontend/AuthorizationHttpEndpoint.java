@@ -31,6 +31,12 @@ import static pg.context.auth.api.frontend.HttpServicesPaths.AUTH_PATH;
 public class AuthorizationHttpEndpoint {
     private final UserAuthenticationService authenticationService;
 
+    /**
+     * Attempt authentication response entity.
+     *
+     * @param loginRequest the login request
+     * @return the response entity
+     */
     @PostMapping(LOGIN_BASE)
     public ResponseEntity<Void> attemptAuthentication(final @Valid @RequestBody LoginRequest loginRequest) {
         log.info("Processing login request for user: {}", loginRequest.getUsername());

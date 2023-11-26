@@ -18,6 +18,11 @@ import pg.lib.cqrs.service.ServiceExecutor;
 @Configuration
 public class SecurityConfig {
 
+    /**
+     * Login request customizer customizer.
+     *
+     * @return the customizer
+     */
     @Bean
     public Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> loginRequestCustomizer() {
         return requests -> requests.requestMatchers(HttpMethod.POST, HttpEndpointPaths.LOGIN)
@@ -25,6 +30,12 @@ public class SecurityConfig {
                 ;
     }
 
+    /**
+     * Context provider context provider.
+     *
+     * @param serviceExecutor the service executor
+     * @return the context provider
+     */
     @Bean
     public ContextProvider<UserContext> contextProvider(final ServiceExecutor serviceExecutor) {
         return new LocalUserContextProvider(serviceExecutor);

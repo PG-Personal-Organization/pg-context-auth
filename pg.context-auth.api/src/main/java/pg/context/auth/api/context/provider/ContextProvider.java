@@ -11,20 +11,20 @@ import java.util.Optional;
  * @param <U> the type parameter
  */
 public interface ContextProvider <U extends UserContext> {
-     /**
-      * Try to get user context optional.
-      *
-      * @param contextToken the context token
-      * @return the optional
-      */
-     Optional<U> tryToGetUserContext(String contextToken);
+    /**
+     * Try to get user context optional.
+     *
+     * @param contextToken the context token
+     * @return the optional
+     */
+    Optional<U> tryToGetUserContext(String contextToken);
 
-     /**
-      * Gets user context.
-      *
-      * @param contextToken the context token
-      * @return the user context
-      * @throws UserContextNotFoundException the user context not found exception
-      */
-     U getUserContext(String contextToken) throws UserContextNotFoundException;
+    /**
+     * Gets user context.
+     *
+     * @param contextToken the context token
+     * @return the user context
+     * @throws UserContextNotFoundException the user context not found exception
+     */
+    U getUserContext(String contextToken) throws UserContextNotFoundException;
 }

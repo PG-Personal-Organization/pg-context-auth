@@ -13,6 +13,9 @@ import pg.context.auth.domain.user.UserService;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * The type Database user authentication service.
+ */
 @Log4j2
 @RequiredArgsConstructor
 @Service

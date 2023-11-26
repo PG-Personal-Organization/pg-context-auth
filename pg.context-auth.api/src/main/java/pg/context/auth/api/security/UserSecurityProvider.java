@@ -7,6 +7,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import pg.context.auth.api.context.provider.ContextProvider;
 import pg.context.auth.domain.context.UserContext;
 
+/**
+ * The type User security provider.
+ */
 //@Service
 @RequiredArgsConstructor
 public class UserSecurityProvider implements UserDetailsService {

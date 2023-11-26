@@ -10,6 +10,9 @@ import pg.context.auth.domain.user.UserService;
 
 import java.util.Set;
 
+/**
+ * The type Users runner.
+ */
 @Service
 @Profile("devlocal")
 @RequiredArgsConstructor
