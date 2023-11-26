@@ -4,21 +4,28 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * The type Http common helper.
+ * The type Http endpoint paths.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class HttpEndpointPaths {
+
     /**
-     * The constant BASE_PATH.
+     * The constant LOGIN_BASE.
      */
     public static final String LOGIN_BASE = "/login";
+
     /**
-     * The constant BASE_PATH.
+     * The constant LOGIN.
      */
     public static final String LOGIN = HttpServicesPaths.AUTH_PATH + LOGIN_BASE;
 
     /**
-     * The constant BASE_PATH.
+     * The constant USER_CONTEXT_QUERY_BASE.
      */
     public static final String USER_CONTEXT_QUERY_BASE = "/UserContextQuery";
+
+    /**
+     * The constant GET_USERS.
+     */
+    public static final String GET_USERS = HttpServicesPaths.USER_PATH;
 }

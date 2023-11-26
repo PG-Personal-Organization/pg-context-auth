@@ -9,7 +9,7 @@ import pg.context.auth.domain.user.UserService;
 import java.util.List;
 
 /**
- * The type User repository service.
+ * The type Database user service.
  */
 @Service
 @RequiredArgsConstructor

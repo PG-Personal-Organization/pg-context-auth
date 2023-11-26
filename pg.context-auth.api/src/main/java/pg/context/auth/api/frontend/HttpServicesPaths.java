@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 /**
- * The type Http common helper.
+ * The type Http services paths.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class HttpServicesPaths {

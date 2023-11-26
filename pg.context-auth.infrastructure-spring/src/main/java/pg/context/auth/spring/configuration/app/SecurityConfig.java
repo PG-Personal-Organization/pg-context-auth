@@ -10,6 +10,7 @@ import pg.context.auth.api.context.provider.ContextProvider;
 import pg.context.auth.api.context.provider.local.LocalUserContextProvider;
 import pg.context.auth.api.frontend.HttpEndpointPaths;
 import pg.context.auth.domain.context.UserContext;
+import pg.lib.common.spring.user.Roles;
 import pg.lib.cqrs.service.ServiceExecutor;
 
 /**
@@ -27,6 +28,18 @@ public class SecurityConfig {
     public Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> loginRequestCustomizer() {
         return requests -> requests.requestMatchers(HttpMethod.POST, HttpEndpointPaths.LOGIN)
                 .anonymous()
+                ;
+    }
+
+    /**
+     * Users request customizer customizer.
+     *
+     * @return the customizer
+     */
+    @Bean
+    public Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> usersRequestCustomizer() {
+        return requests -> requests.requestMatchers(HttpEndpointPaths.GET_USERS)
+                .hasRole(Roles.ADMIN.name())
                 ;
     }
 

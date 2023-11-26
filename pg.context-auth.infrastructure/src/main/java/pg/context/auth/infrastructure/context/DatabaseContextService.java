@@ -15,7 +15,7 @@ import pg.context.auth.infrastructure.cache.CacheNames;
 import java.util.Optional;
 
 /**
- * The type Context repository service.
+ * The type Database context service.
  */
 @Log4j2
 @Service
@@ -25,7 +25,7 @@ public class DatabaseContextService implements ContextService {
     private final Cache contextCache;
 
     /**
-     * Instantiates a new Context repository service.
+     * Instantiates a new Database context service.
      *
      * @param contextRepository      the context repository
      * @param contextSecurityService the context security service

@@ -1,5 +1,6 @@
 package pg.context.auth.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +18,8 @@ import java.util.Set;
 public class User {
     private String id;
     private String username;
+
+    @JsonIgnore
     private String password;
     private boolean enabled;
     private Set<String> roles;

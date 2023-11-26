@@ -1,5 +1,4 @@
 SHOW_SQL: true
-JWT_SECRET: EMPTY
 
 spring:
   datasource:
