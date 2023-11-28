@@ -4,12 +4,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * The interface User repository.
  */
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, String> {
+public interface UserRepository extends JpaRepository<UserEntity, UUID> {
     /**
      * Exists by username boolean.
      *

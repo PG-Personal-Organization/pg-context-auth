@@ -7,10 +7,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 import pg.context.auth.api.cqrs.query.UserContextQuery;
+import pg.context.auth.api.cqrs.query.UserQuery;
 import pg.context.auth.domain.context.UserContext;
+import pg.context.auth.domain.user.User;
 import pg.lib.cqrs.service.ServiceExecutor;
 
 import static pg.context.auth.api.frontend.HttpEndpointPaths.USER_CONTEXT_QUERY_BASE;
+import static pg.context.auth.api.frontend.HttpEndpointPaths.USER_QUERY_BASE;
 import static pg.context.auth.api.frontend.HttpServicesPaths.CQRS_PATH;
 
 /**
@@ -32,7 +35,19 @@ public class CqrsDomainHttpEndpoint {
      */
     @PostMapping(USER_CONTEXT_QUERY_BASE)
     public UserContext execute(final @Valid @NonNull @RequestBody UserContextQuery query) {
-        log.debug("Started execution of UserContextQuery: {}", query);
+        log.info("Started execution of UserContextQuery: {}", query);
+        return serviceExecutor.executeQuery(query);
+    }
+
+    /**
+     * Execute user.
+     *
+     * @param query the query
+     * @return the user
+     */
+    @PostMapping(USER_QUERY_BASE)
+    public User execute(final @Valid @NonNull @RequestBody UserQuery query) {
+        log.info("Started execution of UserQuery: {}", query);
         return serviceExecutor.executeQuery(query);
     }
 }

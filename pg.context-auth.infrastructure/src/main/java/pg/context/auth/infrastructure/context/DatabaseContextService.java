@@ -2,15 +2,14 @@ package pg.context.auth.infrastructure.context;
 
 import jakarta.transaction.Transactional;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.Cache;
 import org.springframework.stereotype.Service;
-import pg.context.auth.domain.context.UserContext;
 import pg.context.auth.domain.context.ContextService;
+import pg.context.auth.domain.context.UserContext;
 import pg.context.auth.domain.user.User;
-import pg.context.auth.infrastructure.cache.CacheNames;
 
 import java.util.Optional;
 
@@ -19,25 +18,12 @@ import java.util.Optional;
  */
 @Log4j2
 @Service
+@RequiredArgsConstructor
 public class DatabaseContextService implements ContextService {
     private final ContextRepository contextRepository;
     private final ContextSecurityService contextSecurityService;
     private final Cache contextCache;
 
-    /**
-     * Instantiates a new Database context service.
-     *
-     * @param contextRepository      the context repository
-     * @param contextSecurityService the context security service
-     * @param contextCache           the context cache
-     */
-    public DatabaseContextService(final ContextRepository contextRepository,
-                                  final ContextSecurityService contextSecurityService,
-                                  final @Qualifier(CacheNames.CONTEXT_CACHE) Cache contextCache) {
-        this.contextRepository = contextRepository;
-        this.contextSecurityService = contextSecurityService;
-        this.contextCache = contextCache;
-    }
 
     @Override
     public Optional<UserContext> findByToken(final @NonNull String contextToken) {

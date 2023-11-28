@@ -5,12 +5,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * The interface Context repository.
  */
 @Repository
-public interface ContextRepository extends JpaRepository<ContextEntity, String> {
+public interface ContextRepository extends JpaRepository<ContextEntity, UUID> {
     /**
      * Find first by context token optional.
      *

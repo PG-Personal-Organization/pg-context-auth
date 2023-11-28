@@ -44,6 +44,19 @@ public class SecurityConfig {
     }
 
     /**
+     * Users request customizer customizer.
+     *
+     * @return the customizer
+     */
+    @Bean
+    public Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> cqrsRequestCustomizer() {
+        return requests -> requests
+                .requestMatchers(HttpEndpointPaths.USER_CONTEXT_QUERY).permitAll()
+                .requestMatchers(HttpEndpointPaths.USER_QUERY).hasRole(Roles.USER.name())
+                ;
+    }
+
+    /**
      * Context provider context provider.
      *
      * @param serviceExecutor the service executor
