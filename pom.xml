@@ -26,7 +26,7 @@
     </modules>
 
     <name>pg.context-auth</name>
-    <description>Backend app for Search Store app</description>
+    <description>Backend app for Context Store app</description>
 
     <properties>
         <pg.context-auth.version>${version}</pg.context-auth.version>

@@ -21,10 +21,6 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
@@ -39,10 +35,6 @@
         </dependency>
 
         <!-- 3rd party libraries-->
-        <dependency>
-            <groupId>net.kaczmarzyk</groupId>
-            <artifactId>specification-arg-resolver</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
@@ -77,18 +69,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                        <configuration>
-                            <excludeGroupIds>de.flapdoodle,de.flapdoodle.embed,de.flapdoodle.graph,
-                                de.flapdoodle.java8,de.flapdoodle.reverse
-                            </excludeGroupIds>
-                        </configuration>
-                    </execution>
-                </executions>
                 <configuration>
                     <excludes>
                         <exclude>
