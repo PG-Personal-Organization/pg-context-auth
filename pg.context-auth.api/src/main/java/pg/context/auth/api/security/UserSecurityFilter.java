@@ -1,12 +1,11 @@
 package pg.context.auth.api.security;
 
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,9 +19,8 @@ import pg.context.auth.api.context.provider.ContextProvider;
 import pg.context.auth.api.frontend.HttpEndpointPaths;
 import pg.context.auth.domain.context.UserContext;
 import pg.lib.common.spring.auth.HeaderAuthenticationFilter;
-import pg.lib.common.spring.auth.HeaderNames;
+import pg.lib.common.spring.storage.HeadersHolder;
 
-import java.io.IOException;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -34,7 +32,6 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
  */
 @Log4j2
 @Service
-@RequiredArgsConstructor
 public class UserSecurityFilter extends HeaderAuthenticationFilter {
     private final ContextProvider<UserContext> contextProvider;
 
@@ -42,42 +39,35 @@ public class UserSecurityFilter extends HeaderAuthenticationFilter {
             antMatcher(HttpEndpointPaths.LOGIN),
             antMatcher("/"),
             antMatcher("/actuator/**"),
-            antMatcher("/swagger-ui/**"),
-            antMatcher("/swagger-ui.html**"),
+            antMatcher("/swagger-ui**"),
             antMatcher("/v3/api-docs/**"));
 
+    public UserSecurityFilter(final @Lazy ContextProvider<UserContext> contextProvider, final @Lazy HeadersHolder headersHolder) {
+        super(headersHolder);
+        this.contextProvider = contextProvider;
+    }
+
     @Override
-    protected void doFilterInternal(final @NonNull HttpServletRequest request,
-                                    final @NonNull HttpServletResponse response,
-                                    final @NonNull FilterChain filterChain) throws ServletException, IOException {
-        final String contextToken = request.getHeader(HeaderNames.CONTEXT_TOKEN);
+    protected void continueFilter(final HttpServletRequest request, final HttpServletResponse response, final FilterChain filterChain,
+                                  final String authenticationToken) {
+        Optional<UserContext> userContext = contextProvider.tryToGetUserContext(authenticationToken);
 
-        if (!(contextToken == null || contextToken.isBlank())) {
-            Optional<UserContext> userContext = contextProvider.tryToGetUserContext(contextToken);
-
-            if (userContext.isEmpty()) {
-                throw new ResponseStatusException(HttpStatus.FORBIDDEN,
-                        String.format("Context with token: %s not found, please login again.", contextToken));
-            }
-
-            var context = userContext.get();
-            Set<SimpleGrantedAuthority> simpleGrantedAuthorities = context.getRoles().stream()
-                    .map(this::toGrantedAuthority)
-                    .collect(Collectors.toUnmodifiableSet());
-
-            Authentication authentication = new UsernamePasswordAuthenticationToken(
-                    context.getUsername(), null, simpleGrantedAuthorities
-            );
-
-            log.debug("Setting security context: {}", authentication);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        } else {
+        if (userContext.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN,
-                    String.format("Authorization header: %s has been not provided", HeaderNames.CONTEXT_TOKEN));
+                    String.format("Context with token: %s not found, please login again.", authenticationToken));
         }
 
-        filterChain.doFilter(request, response);
+        var context = userContext.get();
+        Set<SimpleGrantedAuthority> simpleGrantedAuthorities = context.getRoles().stream()
+                .map(this::toGrantedAuthority)
+                .collect(Collectors.toUnmodifiableSet());
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                context.getUsername(), null, simpleGrantedAuthorities
+        );
+
+        log.debug("Setting security context: {}", authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
     @Override
