@@ -38,6 +38,7 @@ public class UserSecurityFilter extends HeaderAuthenticationFilter {
     private final RequestMatcher requestMatcher = RequestMatchers.anyOf(
             antMatcher(HttpEndpointPaths.LOGIN),
             antMatcher("/"),
+            antMatcher("/error"),
             antMatcher("/actuator/**"),
             antMatcher("/swagger-ui**"),
             antMatcher("/v3/api-docs/**"));
