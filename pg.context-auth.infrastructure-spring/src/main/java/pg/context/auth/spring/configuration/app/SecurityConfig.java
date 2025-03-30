@@ -27,8 +27,7 @@ public class SecurityConfig {
     @Bean
     public Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> loginRequestCustomizer() {
         return requests -> requests.requestMatchers(HttpMethod.POST, HttpEndpointPaths.LOGIN)
-                .anonymous()
-                ;
+                .anonymous();
     }
 
     /**
@@ -39,8 +38,7 @@ public class SecurityConfig {
     @Bean
     public Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> usersRequestCustomizer() {
         return requests -> requests.requestMatchers(HttpEndpointPaths.GET_USERS)
-                .hasRole(Roles.ADMIN.name())
-                ;
+                .hasRole(Roles.ADMIN.name());
     }
 
     /**
@@ -52,8 +50,7 @@ public class SecurityConfig {
     public Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> cqrsRequestCustomizer() {
         return requests -> requests
                 .requestMatchers(HttpEndpointPaths.USER_CONTEXT_QUERY).permitAll()
-                .requestMatchers(HttpEndpointPaths.USER_QUERY).hasRole(Roles.USER.name())
-                ;
+                .requestMatchers(HttpEndpointPaths.USER_QUERY).hasRole(Roles.USER.name());
     }
 
     /**

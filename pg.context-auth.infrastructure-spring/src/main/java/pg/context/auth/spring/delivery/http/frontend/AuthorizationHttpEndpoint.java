@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,14 +49,14 @@ public class AuthorizationHttpEndpoint {
                     .password(loginRequest.getPassword())
                     .build());
         } catch (final Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(422).build();
+           log.error(e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }
 
         return result.<ResponseEntity<Void>>map(userContext -> ResponseEntity.ok()
                         .header(HeaderNames.CONTEXT_TOKEN, userContext.getContextToken())
                         .build())
-                .orElseGet(() -> ResponseEntity.status(401).build());
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 
 }

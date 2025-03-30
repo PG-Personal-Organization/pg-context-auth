@@ -43,6 +43,7 @@ public class UserSecurityFilter extends HeaderAuthenticationFilter {
             antMatcher("/swagger-ui**"),
             antMatcher("/v3/api-docs/**"));
 
+    @SuppressWarnings("checkstyle:HiddenField")
     public UserSecurityFilter(final @Lazy ContextProvider<UserContext> contextProvider, final @Lazy HeadersHolder headersHolder) {
         super(headersHolder);
         this.contextProvider = contextProvider;

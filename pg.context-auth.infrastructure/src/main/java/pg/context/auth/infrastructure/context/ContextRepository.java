@@ -18,7 +18,7 @@ public interface ContextRepository extends JpaRepository<ContextEntity, UUID> {
      * @param contextToken the context token
      * @return the optional
      */
-    Optional<ContextEntity> findFirstByContextToken(final String contextToken);
+    Optional<ContextEntity> findFirstByContextToken(String contextToken);
 
     /**
      * Find all by serial id is not list.
@@ -26,7 +26,7 @@ public interface ContextRepository extends JpaRepository<ContextEntity, UUID> {
      * @param serialId the serial id
      * @return the list
      */
-    List<ContextEntity> findAllBySerialIdIsNot(final String serialId);
+    List<ContextEntity> findAllBySerialIdIsNot(String serialId);
 
     /**
      * Find all by user id list.
@@ -34,5 +34,5 @@ public interface ContextRepository extends JpaRepository<ContextEntity, UUID> {
      * @param userId the user id
      * @return the list
      */
-    List<ContextEntity> findAllByUserId(final String userId);
+    List<ContextEntity> findAllByUserId(String userId);
 }

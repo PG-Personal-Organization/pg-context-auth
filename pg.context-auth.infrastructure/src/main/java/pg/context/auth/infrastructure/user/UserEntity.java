@@ -36,7 +36,8 @@ public class UserEntity {
      * @param enabled  the enabled
      * @param roles    the roles
      */
-    public UserEntity(String username, String password, boolean enabled, Set<String> roles) {
+    @SuppressWarnings("checkstyle:HiddenField")
+    public UserEntity(final String username, final String password, final boolean enabled, final Set<String> roles) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
