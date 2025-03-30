@@ -10,7 +10,7 @@ import java.util.Optional;
  *
  * @param <U> the type parameter
  */
-public interface ContextProvider <U extends UserContext> {
+public interface ContextProvider<U extends UserContext> {
     /**
      * Try to get user context optional.
      *

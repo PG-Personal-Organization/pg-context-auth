@@ -22,10 +22,10 @@ public class UserContextRunner implements ApplicationRunner {
     @Override
     public void run(final ApplicationArguments args) {
         contextService.createContextForUser(User.builder()
-                        .username("Bob")
-                        .enabled(true)
-                        .password("SMTH")
-                        .roles(Set.of("ADMIN"))
+                .username("Bob")
+                .enabled(true)
+                .password("SMTH")
+                .roles(Set.of("ADMIN"))
                 .build());
     }
 }

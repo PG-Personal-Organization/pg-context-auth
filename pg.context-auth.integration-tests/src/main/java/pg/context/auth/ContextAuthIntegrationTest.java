@@ -1,11 +1,10 @@
-package pg.context.auth.common;
+package pg.context.auth;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import pg.context.auth.config.ContextAuthTestConfiguration;
 import pg.context.auth.standalone.ContextAuthApplication;
 
