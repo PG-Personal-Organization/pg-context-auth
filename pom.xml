@@ -72,17 +72,17 @@
             <!-- Libraries -->
             <dependency>
                 <groupId>org.pg</groupId>
-                <artifactId>pg.lib.common</artifactId>
+                <artifactId>pg-lib-common</artifactId>
                 <version>${pg-lib-version}</version>
             </dependency>
             <dependency>
                 <groupId>org.pg</groupId>
-                <artifactId>pg.lib.cqrs</artifactId>
+                <artifactId>pg-lib-cqrs</artifactId>
                 <version>${pg-lib-version}</version>
             </dependency>
             <dependency>
                 <groupId>org.pg</groupId>
-                <artifactId>pg.lib.remote-cqrs</artifactId>
+                <artifactId>pg-lib-remote-cqrs</artifactId>
                 <version>${pg-lib-version}</version>
             </dependency>
 
