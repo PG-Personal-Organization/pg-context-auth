@@ -6,6 +6,8 @@ import pg.context.auth.api.context.provider.ContextProvider;
 import pg.context.auth.api.cqrs.query.UserContextQuery;
 import pg.context.auth.domain.context.UserContext;
 import pg.context.auth.domain.context.UserContextNotFoundException;
+import pg.lib.common.spring.auth.HeaderNames;
+import pg.lib.common.spring.storage.HeadersHolder;
 import pg.lib.cqrs.service.ServiceExecutor;
 
 import java.util.Optional;
@@ -17,6 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LocalUserContextProvider implements ContextProvider<UserContext> {
     private final ServiceExecutor serviceExecutor;
+    private final HeadersHolder headersHolder;
 
     @Override
     public Optional<UserContext> tryToGetUserContext(final String contextToken) {
@@ -31,6 +34,11 @@ public class LocalUserContextProvider implements ContextProvider<UserContext> {
         }
 
         return Optional.ofNullable(result);
+    }
+
+    @Override
+    public Optional<UserContext> tryToGetUserContext() {
+        return headersHolder.tryToGetHeader(HeaderNames.CONTEXT_TOKEN).map(this::getUserContext);
     }
 
     @Override
