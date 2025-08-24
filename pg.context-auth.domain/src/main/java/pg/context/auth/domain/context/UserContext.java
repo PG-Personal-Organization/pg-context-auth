@@ -22,4 +22,12 @@ public class UserContext implements Serializable {
 
     @JsonIgnore
     private String contextToken;
+
+    public boolean hasPermission(final @NonNull String permission) {
+        return roles.contains(permission);
+    }
+
+    public boolean hasAllPermissions(final @NonNull Set<String> permissions) {
+        return permissions.stream().allMatch(this::hasPermission);
+    }
 }
