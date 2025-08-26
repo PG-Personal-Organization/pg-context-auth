@@ -28,6 +28,9 @@ public class UserContext implements Serializable {
     }
 
     public boolean hasAllPermissions(final @NonNull Set<String> permissions) {
+        if (permissions.isEmpty()) {
+            return true;
+        }
         return permissions.stream().allMatch(this::hasPermission);
     }
 }
