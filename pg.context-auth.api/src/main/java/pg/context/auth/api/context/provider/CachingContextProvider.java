@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Log4j2
 @RequiredArgsConstructor
-public abstract class CachingContextProvider implements ContextProvider<UserContext> {
+public abstract class CachingContextProvider implements ContextProvider {
     private final Cache contextCache;
     private final HeadersHolder headersHolder;
 

@@ -33,7 +33,7 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 @Log4j2
 @Service
 public class UserSecurityFilter extends HeaderAuthenticationFilter {
-    private final ContextProvider<UserContext> contextProvider;
+    private final ContextProvider contextProvider;
 
     private final RequestMatcher requestMatcher = RequestMatchers.anyOf(
             antMatcher(HttpEndpointPaths.LOGIN),
@@ -44,7 +44,7 @@ public class UserSecurityFilter extends HeaderAuthenticationFilter {
             antMatcher("/v3/api-docs/**"));
 
     @SuppressWarnings("checkstyle:HiddenField")
-    public UserSecurityFilter(final @Lazy ContextProvider<UserContext> contextProvider, final @Lazy HeadersHolder headersHolder) {
+    public UserSecurityFilter(final @Lazy ContextProvider contextProvider, final @Lazy HeadersHolder headersHolder) {
         super(headersHolder);
         this.contextProvider = contextProvider;
     }

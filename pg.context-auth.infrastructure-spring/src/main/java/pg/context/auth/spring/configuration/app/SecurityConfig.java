@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configurers.AuthorizeH
 import pg.context.auth.api.context.provider.ContextProvider;
 import pg.context.auth.api.context.provider.local.LocalUserContextProvider;
 import pg.context.auth.api.frontend.HttpEndpointPaths;
-import pg.context.auth.domain.context.UserContext;
 import pg.lib.common.spring.storage.HeadersHolder;
 import pg.lib.common.spring.user.Roles;
 import pg.lib.cqrs.service.ServiceExecutor;
@@ -61,7 +60,7 @@ public class SecurityConfig {
      * @return the context provider
      */
     @Bean
-    public ContextProvider<UserContext> contextProvider(final ServiceExecutor serviceExecutor, final HeadersHolder headersHolder) {
+    public ContextProvider contextProvider(final ServiceExecutor serviceExecutor, final HeadersHolder headersHolder) {
         return new LocalUserContextProvider(serviceExecutor, headersHolder);
     }
 }
