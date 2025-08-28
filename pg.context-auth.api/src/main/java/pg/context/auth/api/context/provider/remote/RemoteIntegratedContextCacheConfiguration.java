@@ -14,6 +14,9 @@ import org.springframework.context.annotation.Primary;
 
 import java.util.List;
 
+/**
+ * Currently unused
+ */
 @ConditionalOnBean(CacheManager.class)
 @EnableCaching
 @Configuration

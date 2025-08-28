@@ -9,10 +9,12 @@ management:
 spring:
   config:
     import: optional:file:.env[.properties]
+
   datasource:
     url: jdbc:postgresql://${DATASOURCE_URL}/${DATASOURCE_DATABASE}
     username: ${DATASOURCE_USER}
     password: ${DATASOURCE_PASSWORD}
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -21,3 +23,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+
+  cache:
+    type: caffeine
+    cache-names: usersCache,contextCache
+    caffeine:
+      spec: maximumSize=50_000,expireAfterWrite=1h,expireAfterAccess=15m
