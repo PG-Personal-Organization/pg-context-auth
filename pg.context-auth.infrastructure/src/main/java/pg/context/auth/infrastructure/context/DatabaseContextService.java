@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
 import org.springframework.cache.Cache;
-import org.springframework.stereotype.Service;
 import pg.context.auth.domain.context.ContextService;
 import pg.context.auth.domain.context.UserContext;
 import pg.context.auth.domain.user.User;
@@ -17,13 +16,11 @@ import java.util.Optional;
  * The type Database context service.
  */
 @Log4j2
-@Service
 @RequiredArgsConstructor
 public class DatabaseContextService implements ContextService {
     private final ContextRepository contextRepository;
     private final ContextSecurityService contextSecurityService;
     private final Cache contextCache;
-
 
     @Override
     public Optional<UserContext> findByToken(final @NonNull String contextToken) {

@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.cache.Cache;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 import pg.context.auth.domain.user.User;
 import pg.context.auth.domain.user.UserService;
 
@@ -16,7 +15,6 @@ import java.util.UUID;
  * The type Database user service.
  */
 @Log4j2
-@Service
 @RequiredArgsConstructor
 public class DatabaseUserService implements UserService {
     private final UserRepository userRepository;

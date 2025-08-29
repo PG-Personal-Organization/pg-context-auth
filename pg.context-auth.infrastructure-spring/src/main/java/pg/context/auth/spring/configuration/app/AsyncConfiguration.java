@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 @EnableAsync
 @EnableScheduling
 @RequiredArgsConstructor
-public class AsyncConfig {
+public class AsyncConfiguration {
     private final ContextService contextService;
 
     /**

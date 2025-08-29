@@ -3,7 +3,6 @@ package pg.context.auth.application.cqrs.query.handlers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.cache.Cache;
-import org.springframework.stereotype.Service;
 import pg.context.auth.api.cqrs.query.UserQuery;
 import pg.context.auth.domain.user.User;
 import pg.context.auth.domain.user.UserNotFoundException;
@@ -16,7 +15,6 @@ import java.util.Optional;
  * The type User query handler.
  */
 @Log4j2
-@Service
 @RequiredArgsConstructor
 public class UserQueryHandler implements QueryHandler<UserQuery, User> {
     private final UserService userService;

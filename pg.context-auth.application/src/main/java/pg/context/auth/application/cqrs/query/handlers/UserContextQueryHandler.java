@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
 import org.springframework.cache.Cache;
-import org.springframework.stereotype.Service;
 import pg.context.auth.api.cqrs.query.UserContextQuery;
 import pg.context.auth.domain.context.ContextService;
 import pg.context.auth.domain.context.UserContext;
@@ -15,7 +14,6 @@ import pg.lib.cqrs.query.QueryHandler;
  * The type User context query handler.
  */
 @Log4j2
-@Service
 @RequiredArgsConstructor
 public class UserContextQueryHandler implements QueryHandler<UserContextQuery, UserContext> {
     private final ContextService contextService;

@@ -17,7 +17,7 @@ import pg.lib.cqrs.service.ServiceExecutor;
  * The type Security config.
  */
 @Configuration
-public class SecurityConfig {
+public class SecurityConfiguration {
 
     /**
      * Login request customizer customizer.

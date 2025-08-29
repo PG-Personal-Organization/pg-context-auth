@@ -2,9 +2,16 @@ server:
   error:
     include-message: always
   port: 8081
+
 management:
   server:
     port: 9081
+
+logging:
+  level:
+    root: info
+  file:
+    name: context-auth-ms-app.log
 
 spring:
   config:
@@ -28,4 +35,4 @@ spring:
     type: caffeine
     cache-names: usersCache,contextCache
     caffeine:
-      spec: maximumSize=50_000,expireAfterWrite=1h,expireAfterAccess=15m
+      spec: maximumSize=50000,expireAfterWrite=1h,expireAfterAccess=15m
