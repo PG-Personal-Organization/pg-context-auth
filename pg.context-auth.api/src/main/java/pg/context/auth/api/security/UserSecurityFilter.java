@@ -13,7 +13,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatchers;
-import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import pg.context.auth.api.context.provider.ContextProvider;
 import pg.context.auth.api.frontend.HttpEndpointPaths;
@@ -31,7 +30,6 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
  * The type User security filter.
  */
 @Log4j2
-@Service
 public class UserSecurityFilter extends HeaderAuthenticationFilter {
     private final ContextProvider contextProvider;
 

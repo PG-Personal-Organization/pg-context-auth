@@ -1,9 +1,10 @@
 package pg.context.auth.api.security;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
+import pg.context.auth.api.context.provider.ContextProvider;
 import pg.context.auth.api.context.provider.remote.RemoteUserContextConfiguration;
+import pg.lib.common.spring.auth.HeaderAuthenticationFilter;
+import pg.lib.common.spring.storage.HeadersHolder;
 
 /**
  * The type Context based security configuration.
@@ -12,7 +13,10 @@ import pg.context.auth.api.context.provider.remote.RemoteUserContextConfiguratio
 @Import({
         RemoteUserContextConfiguration.class
 })
-@ComponentScan(basePackages = "pg.context.auth.api.security")
 public class ContextBasedSecurityConfiguration {
 
+    @Bean
+    public HeaderAuthenticationFilter userSecurityFilter(final @Lazy ContextProvider contextProvider, final @Lazy HeadersHolder headersHolder) {
+        return new UserSecurityFilter(contextProvider, headersHolder);
+    }
 }
