@@ -31,6 +31,7 @@ public abstract class CachingContextProvider implements ContextProvider {
         try {
             result = executeQuery(query);
             log.info("Fetching context {} ended successfully", result);
+            contextCache.put(contextToken, result);
         } catch (final Exception e) {
             log.error("Error appeared when trying to fetch context", e);
         }
@@ -60,14 +61,14 @@ public abstract class CachingContextProvider implements ContextProvider {
 
         try {
             result = executeQuery(query);
+            contextCache.put(contextToken, result);
+            log.info("Fetching context {} ended successfully", result);
         } catch (final Exception e) {
             if (e instanceof UserContextNotFoundException ex) {
                 throw ex;
             }
             throw new UserContextNotFoundException(contextToken);
         }
-
-        log.info("Fetching context {} ended successfully", result);
         return result;
     }
 
