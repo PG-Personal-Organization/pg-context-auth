@@ -1,6 +1,7 @@
 .env
 settings.xml
 context-auth-ms-app.log
+context-auth-ms-app.log**
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
