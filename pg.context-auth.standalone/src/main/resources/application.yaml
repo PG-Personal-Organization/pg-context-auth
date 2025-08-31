@@ -11,7 +11,7 @@ logging:
   level:
     root: info
   file:
-    name: context-auth-ms-app.log
+    name: logs/context-auth-ms-app.log
 
 spring:
   config:
