@@ -5,8 +5,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import pg.context.auth.domain.context.ContextService;
 import pg.context.auth.domain.user.User;
-import pg.context.auth.infrastructure.context.DatabaseContextService;
 
 import java.util.Set;
 
@@ -17,7 +17,7 @@ import java.util.Set;
 @Profile("devlocal")
 @RequiredArgsConstructor
 public class UserContextRunner implements ApplicationRunner {
-    private final DatabaseContextService contextService;
+    private final ContextService contextService;
 
     @Override
     public void run(final ApplicationArguments args) {
