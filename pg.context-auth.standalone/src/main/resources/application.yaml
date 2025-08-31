@@ -6,6 +6,13 @@ server:
 management:
   server:
     port: 9081
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
 
 logging:
   level:
