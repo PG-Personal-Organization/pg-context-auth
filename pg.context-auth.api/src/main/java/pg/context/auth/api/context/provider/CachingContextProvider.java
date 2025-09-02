@@ -45,7 +45,7 @@ public abstract class CachingContextProvider implements ContextProvider {
         if (contextToken.isEmpty()) {
             return Optional.empty();
         }
-        return contextToken.map(this::getUserContext);
+        return contextToken.flatMap(this::tryToGetUserContext);
     }
 
     @Override
