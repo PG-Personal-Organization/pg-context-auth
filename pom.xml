@@ -13,7 +13,7 @@
     <groupId>pg.context-auth</groupId>
     <artifactId>context-auth</artifactId>
     <packaging>pom</packaging>
-    <version>3.4.0</version>
+    <version>3.4.1</version>
 
     <modules>
         <module>pg.context-auth.api</module>
@@ -31,7 +31,7 @@
         <pg.context-auth.version>${project.version}</pg.context-auth.version>
 
         <!-- Libraries -->
-        <pg-lib-version>2.4.0</pg-lib-version>
+        <pg-lib-version>2.4.1</pg-lib-version>
     </properties>
 
     <dependencyManagement>
