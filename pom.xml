@@ -13,7 +13,7 @@
     <groupId>pg.context-auth</groupId>
     <artifactId>context-auth</artifactId>
     <packaging>pom</packaging>
-    <version>3.4.1</version>
+    <version>3.4.2</version>
 
     <modules>
         <module>pg.context-auth.api</module>
