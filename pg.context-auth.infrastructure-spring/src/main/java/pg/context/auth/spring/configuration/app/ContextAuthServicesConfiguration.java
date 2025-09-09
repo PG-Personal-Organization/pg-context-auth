@@ -14,6 +14,7 @@ import pg.context.auth.infrastructure.user.DatabaseUserService;
 import pg.context.auth.infrastructure.user.UserRepository;
 import pg.kafka.message.MessageDestination;
 import pg.kafka.sender.EventSender;
+import pg.kafka.topic.TopicDefinition;
 import pg.kafka.topic.TopicName;
 
 import java.util.Objects;
@@ -41,6 +42,13 @@ public class ContextAuthServicesConfiguration {
         return MessageDestination.builder()
                 .topic(TopicName.of("clear-remote-contexts-cache-topic"))
                 .messageClass(ClearRemoteContextsCacheMessage.class)
+                .build();
+    }
+
+    @Bean
+    public TopicDefinition clearRemoteContextsCacheTopicDefinition() {
+        return TopicDefinition.DEFAULT
+                .topic(TopicName.of("clear-remote-contexts-cache-topic"))
                 .build();
     }
 }
