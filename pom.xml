@@ -6,14 +6,14 @@
     <parent>
         <groupId>org.pg</groupId>
         <artifactId>parent</artifactId>
-        <version>2.0.0</version>
+        <version>2.1.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>pg.context-auth</groupId>
     <artifactId>context-auth</artifactId>
     <packaging>pom</packaging>
-    <version>3.4.2</version>
+    <version>3.5.0</version>
 
     <modules>
         <module>pg.context-auth.api</module>
@@ -31,7 +31,8 @@
         <pg.context-auth.version>${project.version}</pg.context-auth.version>
 
         <!-- Libraries -->
-        <pg-lib-version>2.4.1</pg-lib-version>
+        <pg-lib-version>2.5.0</pg-lib-version>
+        <pg-kafka-version>2.3.2</pg-kafka-version>
     </properties>
 
     <dependencyManagement>
@@ -83,6 +84,11 @@
                 <groupId>org.pg</groupId>
                 <artifactId>pg-lib-remote-cqrs</artifactId>
                 <version>${pg-lib-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.pg</groupId>
+                <artifactId>pg-kafka</artifactId>
+                <version>${pg-kafka-version}</version>
             </dependency>
 
         </dependencies>

@@ -6,11 +6,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import lombok.val;
 import org.springframework.cache.Cache;
+import pg.context.auth.domain.context.ClearRemoteContextsCacheMessage;
 import pg.context.auth.domain.context.ContextService;
 import pg.context.auth.domain.context.UserContext;
 import pg.context.auth.domain.user.User;
+import pg.kafka.sender.EventSender;
 
+import java.util.Collections;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * The type Database context service.
@@ -21,6 +25,7 @@ public class DatabaseContextService implements ContextService {
     private final ContextRepository contextRepository;
     private final ContextSecurityService contextSecurityService;
     private final Cache contextCache;
+    private final EventSender eventSender;
 
     @Override
     public Optional<UserContext> findByToken(final @NonNull String contextToken) {
@@ -60,6 +65,7 @@ public class DatabaseContextService implements ContextService {
             log.info("Removing context with token: {}", contextToken);
             contextRepository.delete(contextBox.get());
             contextCache.evict(contextToken);
+            eventSender.sendEvent(ClearRemoteContextsCacheMessage.of(Collections.singleton(contextToken)));
         }
     }
 
@@ -72,6 +78,7 @@ public class DatabaseContextService implements ContextService {
             log.info("Deleting old contexts in number:{} for user: {}", contexts.size(), user);
             contextRepository.deleteAllInBatch(contexts);
             contexts.forEach(context -> contextCache.evict(context.getContextToken()));
+            eventSender.sendEvent(ClearRemoteContextsCacheMessage.of(contexts.stream().map(ContextEntity::getContextToken).collect(Collectors.toSet())));
         } else {
             log.info("No previous user contexts found");
         }
@@ -85,6 +92,7 @@ public class DatabaseContextService implements ContextService {
         log.info("Cleaning deprecatedContexts: {}", deprecatedContexts);
         contextRepository.deleteAllInBatch(deprecatedContexts);
         deprecatedContexts.forEach(context -> contextCache.evict(context.getContextToken()));
+        eventSender.sendEvent(ClearRemoteContextsCacheMessage.of(deprecatedContexts.stream().map(ContextEntity::getContextToken).collect(Collectors.toSet())));
     }
 
     private void signContext(final @NonNull ContextEntity context) {

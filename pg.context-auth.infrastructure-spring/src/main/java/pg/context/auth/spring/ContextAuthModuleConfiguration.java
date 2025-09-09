@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import pg.context.auth.spring.configuration.app.ContextAuthCqrsConfiguration;
 import pg.context.auth.spring.configuration.app.ContextAuthServicesConfiguration;
+import pg.kafka.config.KafkaConfiguration;
 import pg.lib.common.spring.config.CommonModuleConfiguration;
 import pg.lib.cqrs.config.CommandQueryAutoConfiguration;
 
@@ -22,6 +23,8 @@ import pg.lib.cqrs.config.CommandQueryAutoConfiguration;
         CommandQueryAutoConfiguration.class,
         ContextAuthCqrsConfiguration.class,
         ContextAuthServicesConfiguration.class,
+
+        KafkaConfiguration.class
 })
 public class ContextAuthModuleConfiguration {
 }

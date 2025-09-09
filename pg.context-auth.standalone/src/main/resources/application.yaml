@@ -56,3 +56,12 @@ spring:
     cache-names: usersCache,contextCache
     caffeine:
       spec: maximumSize=50000,expireAfterWrite=1h,expireAfterAccess=15m
+
+pg:
+  kafka:
+    bootstrap-server: ${KAFKA_BOOTSTRAP_SERVER:localhost:9092}
+    enabled: true
+
+  context-auth:
+    remote-context-provider:
+      enabled: false
