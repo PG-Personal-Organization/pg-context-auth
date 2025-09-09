@@ -17,7 +17,13 @@ import java.lang.annotation.Target;
  */
 @SpringBootTest(
         classes = ContextAuthApplication.class,
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        properties = {
+                "spring.kafka.consumer.auto-offset-reset=earliest",
+                "spring.kafka.consumer.group-id=test-group",
+                "pg.kafka.bootstrap-server=${spring.embedded.kafka.brokers}",
+                "spring.kafka.bootstrap-servers=${spring.embedded.kafka.brokers}"
+        }
 )
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles({"test"})
